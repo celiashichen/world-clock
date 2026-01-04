@@ -549,6 +549,22 @@
         })
         .sort((a,b) => (b.pop||0) - (a.pop||0));
 
+      if (!CITY_DB.some(c => c.tz === "UTC")) {
+        const utcEntry = {
+          id: "manual:utc",
+          city: "UTC",
+          tz: "UTC",
+          country: "",
+          pop: 0,
+          source: "manual",
+          q: "utc",
+          _option: optionText({ city: "UTC", tz: "UTC", country: "", q: "utc" }),
+          _optionLower: norm(optionText({ city: "UTC", tz: "UTC", country: "", q: "utc" })),
+          _cityLower: norm("UTC"),
+        };
+        CITY_DB.unshift(utcEntry);
+      }
+
       cityHintEl.textContent = "";
       cityHintEl.style.display = "none";
     }catch{
